@@ -1,3 +1,12 @@
 language: node_js
 node_js:
   - 14
+
+services:
+  - docker
+
+script:
+  - yarn test
+  - docker build -t local/app .
+  - docker run --rm -p3000:3000 -d local/app
+  - curl --retry 10 --retry-connrefused http://localhost:3000/sum\?a\=1\&b\=2 | grep "{\"sum\":3}"
