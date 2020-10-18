@@ -1,0 +1,22 @@
+{
+  "name": "travis-docker-test",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "git@github.com:tsamaya/travis-docker-test.git",
+  "author": "Arnaud Ferrand <arferrand@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha ./tests --recursive --exit"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "hippie": "^0.6.1",
+    "mocha": "^8.2.0",
+    "nodemon": "^2.0.5",
+    "supertest": "^5.0.0"
+  }
+}
