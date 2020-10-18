@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - 14
+cache: yarn
 
 services:
   - docker
@@ -9,5 +10,4 @@ script:
   - yarn test
   - docker build -t local/app .
   - docker run --rm -p3000:3000 -d local/app
-  - curl --version
-  - curl --retry 10 http://localhost:3000/sum\?a\=1\&b\=2 | grep "{\"sum\":3}"
+  - curl -4 --retry 10 http://localhost:3000/sum\?a\=1\&b\=2 | grep "{\"sum\":3}"
