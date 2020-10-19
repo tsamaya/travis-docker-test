@@ -9,5 +9,6 @@ services:
 script:
   - yarn test
   - docker build -t local/app .
-  - docker run --rm -p3000:3000 -d local/app
-  - curl -4 --retry 10 http://localhost:3000/sum\?a\=1\&b\=2 | grep "{\"sum\":3}"
+  - docker run --rm -p3000:3000 -d --name built-image local/app
+  - docker run --rm  --network container:built-image curlimages/curl -4 --retry 6 --retry-connrefused http://localhost:3000/sum\?a\=1\&b\=2 | grep "{\"sum\":3}"
+  - docker stop built-image
